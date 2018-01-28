@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import logo from "./logo.svg";
 import "./KiwiDemo.css";
+import SearchPage from "./pages/search-page/SearchPage";
 
 class KiwiDemo extends Component {
     render() {
@@ -10,6 +11,7 @@ class KiwiDemo extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Welcome to Kiwi demo in React</h1>
                 </header>
+                <SearchPage/>
             </div>
         );
     }
