@@ -9,27 +9,31 @@ class SearchForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            from: '',
-            to: '',
-            date: '',
+            from: 'prague_cz',
+            to: 'brno_cz',
+            date: '15/02/2018',
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        this.props.onSearchValueChange(this.state);
+        e.preventDefault();
     }
 
     handleChange(e, key) {
         let newState = {};
         newState[key] = e.target.value;
-        this.setState(newState, () => {
-            this.props.onSearchValueChange(this.state);
-        });
+        this.setState(newState);
     }
 
     render() {
         let {from, to, date} = this.state;
 
         return (
-            <form className="search-form">
+            <form className="search-form" onSubmit={(e) => this.handleSubmit(e)}>
                 <div className="form-row">
                     <div className="form-group col-md-4">
                         <label htmlFor="search-form-from">From</label>
