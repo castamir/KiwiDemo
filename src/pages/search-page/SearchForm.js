@@ -1,5 +1,11 @@
 import React, {Component} from "react";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
 import "./SearchForm.css";
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 
 class SearchForm extends Component {
     static propTypes = {
@@ -11,7 +17,7 @@ class SearchForm extends Component {
         this.state = {
             from: 'prague_cz',
             to: 'brno_cz',
-            date: '15/02/2018',
+            date: moment(),
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -19,13 +25,20 @@ class SearchForm extends Component {
     }
 
     handleSubmit(e) {
-        this.props.onSearchValueChange(this.state);
+        let {from, to, date} = this.state;
+
+        this.props.onSearchValueChange({
+            from: from,
+            to: to,
+            date: date.format('DD/MM/YYYY'),
+        });
+
         e.preventDefault();
     }
 
-    handleChange(e, key) {
+    handleChange(value, key) {
         let newState = {};
-        newState[key] = e.target.value;
+        newState[key] = value;
         this.setState(newState);
     }
 
@@ -38,19 +51,24 @@ class SearchForm extends Component {
                     <div className="form-group col-md-4">
                         <label htmlFor="search-form-from">From</label>
                         <input type="text" className="form-control" id="search-form-from" placeholder="Prague"
-                            value={from} onChange={(e) => this.handleChange(e, 'from')}
+                            value={from} onChange={(e) => this.handleChange(e.target.value, 'from')}
                         />
                     </div>
                     <div className="form-group col-md-4">
                         <label htmlFor="search-form-to">To</label>
                         <input type="text" className="form-control" id="search-form-to" placeholder="Brno"
-                            value={to} onChange={(e) => this.handleChange(e, 'to')}
+                            value={to} onChange={(e) => this.handleChange(e.target.value, 'to')}
                         />
                     </div>
                     <div className="form-group col-md-4">
                         <label htmlFor="search-form-date">Date</label>
-                        <input type="text" className="form-control" id="search-form-date" placeholder="DD/MM/YYYY"
-                            value={date} onChange={(e) => this.handleChange(e, 'date')}
+                        {/*<input type="text" className="form-control" id="search-form-date" placeholder="DD/MM/YYYY"*/}
+                            {/*value={date} onChange={(e) => this.handleChange(e, 'date')}*/}
+                        {/*/>*/}
+                        <DatePicker
+                            selected={this.state.date}
+                            onChange={(value) => this.handleChange(value, 'date')}
+                            className="form-control"
                         />
                     </div>
                 </div>
