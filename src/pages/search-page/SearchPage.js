@@ -38,8 +38,8 @@ class SearchPage extends Component {
         return (
             <table className={'table table-stripped table-hover'}>
                 <tr>
-                    <th>Departure / Arrival</th>
                     <th>From / To</th>
+                    <th>Departure / Arrival</th>
                     <th>Fly duration</th>
                 </tr>
                 {results.map(item =>
