@@ -62,9 +62,6 @@ class SearchForm extends Component {
                     </div>
                     <div className="form-group col-md-4">
                         <label htmlFor="search-form-date">Date</label>
-                        {/*<input type="text" className="form-control" id="search-form-date" placeholder="DD/MM/YYYY"*/}
-                            {/*value={date} onChange={(e) => this.handleChange(e, 'date')}*/}
-                        {/*/>*/}
                         <DatePicker
                             selected={this.state.date}
                             onChange={(value) => this.handleChange(value, 'date')}
